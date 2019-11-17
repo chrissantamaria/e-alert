@@ -1,76 +1,35 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Typography, TextField, Button } from '@material-ui/core';
-import NumberFormat from 'react-number-format';
-import { useNotification } from './providers/NotificationProvider';
+import React from 'react';
+import styled from 'styled-components';
+import { responsiveFontSizes, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
-export default () => {
-  const setNotification = useNotification();
-  const [number, setNumber] = useState('8135455164');
+import Content from './Content';
+import { ContentContainer } from './styles';
+import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
-  const addNumber = async () => {
-    try {
-      setNotification('Adding number...');
-      await axios.post('/api/addNumber', { number });
-      setNotification(
-        'Number succesfully added, check for a confirmation text'
-      );
-    } catch (e) {
-      setNotification('An error occured while adding your number');
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
 
-      const { status, data } = e.response;
-      // Not an error, user-friendly message
-      if (status === 400) {
-        setNotification(data.error.message);
-      } else {
-        console.log(data.error.message || data);
-      }
+const theme = responsiveFontSizes(
+  createMuiTheme({
+    palette: {
+      primary: { main: '#6495ed', contrastText: '#fff' }
     }
-  };
+  })
+);
 
-  const sendAlert = async message => {
-    try {
-      setNotification('Sending alert...');
-      await axios.post('/api/alert', { message });
-      setNotification('Alert successfully sent');
-    } catch (e) {
-      setNotification('An error occured while sending your alert');
-      console.error(e);
-    }
-  };
-
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
-      <Typography variant="h2" component="h1" gutterBottom>
-        E-Alert
-      </Typography>
-      <NumberFormat
-        value={number}
-        onChange={e => setNumber(e.target.value)}
-        format="(###) ###-####"
-        mask="_"
-        customInput={TextField}
-        variant="outlined"
-      />
-      <Button color="primary" variant="contained" onClick={addNumber}>
-        Add Number
-      </Button>
-      <Button color="secondary" onClick={() => sendAlert('Fire alert message')}>
-        Fire
-      </Button>
-      <Button
-        color="secondary"
-        onClick={() => sendAlert('Lockdown alert message')}
-      >
-        Lockdown
-      </Button>
-    </div>
-  );
-};
+export default () => (
+  <ThemeProvider theme={theme}>
+    <AppContainer>
+      <NavBar />
+      <ContentContainer>
+        <Content />
+      </ContentContainer>
+      <Footer />
+    </AppContainer>
+  </ThemeProvider>
+);
