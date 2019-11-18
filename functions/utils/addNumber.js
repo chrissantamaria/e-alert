@@ -1,7 +1,11 @@
 const admin = require('firebase-admin');
 const db = admin.firestore();
-
 const phone = require('phone');
+
+const sendMessage = require('./sendMessage');
+
+const CONFIRMATION_MESSAGE =
+  'Your number has been successfully registered with E-Alert. Visit the platform at https://e-alert-3b6bd.firebaseapp.com/';
 
 module.exports = async (req, res) => {
   try {
@@ -38,6 +42,11 @@ module.exports = async (req, res) => {
     }
 
     await ref.set({});
+
+    await sendMessage({
+      number,
+      message: CONFIRMATION_MESSAGE
+    });
 
     res.send();
   } catch (e) {
