@@ -22,9 +22,7 @@ export default () => {
 
       setNotification('Adding number...');
       await axios.post('/api/addNumber', { number });
-      setNotification(
-        'Number succesfully added, check for a confirmation text'
-      );
+      setNotification('Number succesfully added');
     } catch (e) {
       setNotification('An error occured while adding your number');
 
