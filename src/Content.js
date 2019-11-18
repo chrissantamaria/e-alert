@@ -4,6 +4,10 @@ import { Typography, TextField, Button } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 import { useNotification } from './providers/NotificationProvider';
 
+const FIRE_MESSAGE = 'Fire alarm activated. Evacuate the building immediately.';
+const LOCKDOWN_MESSAGE =
+  'Lockdown initiated. Find shelter immediately. Do not open doors for anyone until further notice. Ignore all fire alarms.';
+
 export default () => {
   const setNotification = useNotification();
   const [number, setNumber] = useState('');
@@ -42,7 +46,7 @@ export default () => {
       }
 
       setNotification('Sending alert...');
-      await axios.post('/api/alert', { message });
+      await axios.post('/api/alert', { message: `TEST ALERT: ${message}` });
       setNotification('Alert successfully sent');
     } catch (e) {
       setNotification('An error occured while sending your alert');
@@ -85,11 +89,7 @@ export default () => {
         <Button
           color="primary"
           variant="contained"
-          onClick={() =>
-            sendAlert(
-              'Fire alarm activated. Evacuate the building immediately.'
-            )
-          }
+          onClick={() => sendAlert(FIRE_MESSAGE)}
           style={{ margin: '0 0.5rem' }}
         >
           Fire
@@ -97,11 +97,7 @@ export default () => {
         <Button
           color="primary"
           variant="contained"
-          onClick={() =>
-            sendAlert(
-              'Lockdown initiated. Find shelter immediately. Do not open doors for anyone until further notice. Ignore all fire alarms.'
-            )
-          }
+          onClick={() => sendAlert(LOCKDOWN_MESSAGE)}
           style={{ margin: '0 0.5rem' }}
         >
           Lockdown
