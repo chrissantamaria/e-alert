@@ -5,8 +5,8 @@ admin.initializeApp();
 const express = require('express');
 const app = express();
 
-const addNumber = require('./routes/addNumber');
-const alert = require('./routes/alert');
+const addNumber = require('./utils/addNumber');
+const alert = require('./utils/alert');
 
 app.get('/api/ping', async (req, res) => {
   res.send('pong');
