@@ -2,10 +2,9 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "scripts": {
-    "start": "npm run get-env && npm run set-creds",
+    "start": "npm run get-env && npm run emulators",
     "get-env": "firebase functions:config:get > .runtimeconfig.json",
-    "set-creds": "cross-env GOOGLE_APPLICATION_CREDENTIALS=creds.json npm run emulators",
-    "emulators": "firebase emulators:start --only hosting,functions"
+    "emulators": "firebase emulators:start"
   },
   "engines": {
     "node": "8"
