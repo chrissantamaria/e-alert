@@ -1,18 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 import { responsiveFontSizes, createMuiTheme } from '@material-ui/core/styles';
+import { CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
+import NotificationProvider from './providers/NotificationProvider';
 
 import Content from './views/home';
-import { ContentContainer } from './styles';
+import { AppContainer, ContentContainer } from './styles';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
-
-const AppContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`;
 
 const theme = responsiveFontSizes(
   createMuiTheme({
@@ -23,13 +18,16 @@ const theme = responsiveFontSizes(
 );
 
 export default () => (
-  <ThemeProvider theme={theme}>
-    <AppContainer>
-      <NavBar />
-      <ContentContainer>
-        <Content />
-      </ContentContainer>
-      <Footer />
-    </AppContainer>
-  </ThemeProvider>
+  <NotificationProvider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppContainer>
+        <NavBar />
+        <ContentContainer>
+          <Content />
+        </ContentContainer>
+        <Footer />
+      </AppContainer>
+    </ThemeProvider>
+  </NotificationProvider>
 );
