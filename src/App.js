@@ -5,7 +5,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import NotificationProvider from './providers/NotificationProvider';
 
 import Content from './views/home';
-import { AppContainer, ContentContainer } from './styles';
+import { AppContainer } from './styles';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 
@@ -23,9 +23,7 @@ export default () => (
       <CssBaseline />
       <AppContainer>
         <NavBar />
-        <ContentContainer>
-          <Content />
-        </ContentContainer>
+        <Content />
         <Footer />
       </AppContainer>
     </ThemeProvider>
