@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { responsiveFontSizes, createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 
-import Content from './Content';
+import Content from './views/home';
 import { ContentContainer } from './styles';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
