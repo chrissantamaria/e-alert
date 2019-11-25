@@ -1,13 +1,12 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Toolbar } from '@material-ui/core';
+import logo from '../assets/logo.png';
 
 export default () => (
   <div>
     <AppBar position="relative">
       <Toolbar>
-        <Typography variant="h4" component="h1">
-          E-Alert
-        </Typography>
+        <img style={{ maxWidth: 300 }} src={logo} alt="E-Alert Logo" />
       </Toolbar>
     </AppBar>
   </div>
