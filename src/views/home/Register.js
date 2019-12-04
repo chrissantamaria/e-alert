@@ -28,6 +28,8 @@ export default () => {
       } else {
         console.log(data.error.message || data);
       }
+    } finally {
+      setNumber('');
     }
   };
 
